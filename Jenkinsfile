@@ -4,7 +4,7 @@ def fortifyCredentialsId = "fortifyCredentialsId"
 pipeline{
 
         agent{
-            label 'docker-azcli-kubectl-slave'
+            label 'master'
         }
 
         tools{
@@ -50,7 +50,7 @@ stage('Push image to ACR with buildno tag'){
      	script{
 //You would need to first register with ACR before you can push images to your account
 
-  docker.withRegistry('https://portaltstuscacr.azurecr.io', 'portaltstuscacr') {
+  docker.withRegistry('https://apptstuscacr.azurecr.io', 'acr') {
       app.push("${env.BUILD_NUMBER}")
       app.push("latest")
 
